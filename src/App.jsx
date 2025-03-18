@@ -1,49 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css'
-import { Route, Switch } from 'react-router-dom'
-import Header from './pages/Header'
-import Home from './pages/Home'
-import Success from './pages/Success'
-import Orderpizza from './pages/Success'
+import { useState } from "react";
+import "./App.css";
+import { Route, Switch } from "react-router-dom";
 
-
+import OrderForm from "./pages/OrderForm";
+import "bootstrap/dist/css/bootstrap.min.css";
+import HomePage from "./pages/HomePage";
+import Success from "./pages/Success";
+import { initialFormData } from "./dummyData";
 
 function App() {
-
-  const [pizzaKalınlık, setPizzaKalınlık] = useState("");
-  const [pizzaBoyut, setPizzaBoyut] = useState("");
-  const [pizzaMalzeme, setPizzaMalzeme] = useState([]);
-
+  const [form, setForm] = useState(initialFormData);
 
   return (
-    <div>
-      <Route>
-        <Header />
-
+    <>
+      <div>
         <Switch>
           <Route exact path="/">
-            <Home />
+            <HomePage />
           </Route>
-          <Route path="/Orderpizza">
-            <Orderpizza
-              pizzaKalınlık={pizzaKalınlık}
-              pizzaBoyut={pizzaBoyut}
-              pizzaMalzeme={pizzaMalzeme}
-            />
+          <Route path="/orderform">
+            <OrderForm form={form} setForm={setForm} />
           </Route>
-          <Route path="/Success">
-            <Success />
+          <Route path="/success">
+            <Success form={form} />
           </Route>
-
         </Switch>
-
-      </Route>
-
-
-    </div >
-  )
+      </div>
+    </>
+  );
 }
 
-export default App
+export default App;
